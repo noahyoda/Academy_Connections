@@ -2,7 +2,9 @@ package Academy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Basic Graph class to solve problem in Solution fileS
@@ -14,18 +16,15 @@ import java.util.List;
 
 public class Graph {
 
-	private HashMap<Vertex, List<Vertex>> connections;
-	private HashMap<Vertex, List<Vertex>> indegrees;
+	private HashMap<Vertex, List<Vertex>> vertices;
 	
 	Graph(){
-		connections = new HashMap<Vertex, List<Vertex>>();
+		vertices = new HashMap<>();
 	}
 	
 	public void addVertex(Vertex newHomie) {
 		//if newHomie doesn't already exist
-		if(!connections.containsKey(newHomie) || !indegrees.containsKey(newHomie)) {
-			
-		}
+		
 	}
 	
 	public void addConnection(Vertex start, Vertex end) {
@@ -60,6 +59,17 @@ public class Graph {
 		if(!connections.containsKey(curr))
 			throw new NullPointerException();
 		return connections.get(curr);
+	}
+	
+	public List<Vertex> search(Vertex beginning, Vertex end){
+		if(connections.containsKey(beginning) && indegrees.containsKey(end)) {
+			ArrayList<Vertex> paths = new ArrayList<>();
+			Queue<Vertex> toVisit = new LinkedList<>();
+			
+			
+			
+		}
+		return null;
 	}
 	
 }
