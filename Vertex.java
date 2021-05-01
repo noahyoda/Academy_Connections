@@ -8,11 +8,27 @@ public class Vertex {
 	private String name;
 	private List<Vertex> indegrees;
 	private List<Vertex> connections;
+	private Vertex previous;
+	int distance;
 	
 	public Vertex(String value){
 		this.name = value;
 		connections = new ArrayList<>();
 		indegrees = new ArrayList<>();
+		distance = -1;
+		previous = null;
+	}
+	public Vertex getPrevious() {
+		return previous;
+	}
+	public void setPrevious(Vertex previous) {
+		this.previous = previous;
+	}
+	public int getDistance() {
+		return distance;
+	}
+	public void setDistance(int distance) {
+		this.distance = distance;
 	}
 	/**
 	 * custom equals method to check if values are the same between vertices

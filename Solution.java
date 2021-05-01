@@ -21,11 +21,6 @@ public class Solution {
 	 * @throws IOException 
 	 */
 	public static String Connection(String[] args) throws IOException {
-		/*TODO
-		 * organize graph based on results of file
-		 * sort from base to solution
-		 * 
-		*/
 		ArrayList<String> naming = names(args[0]);
 		StringBuilder result = new StringBuilder();
 		for(int i = naming.size() - 1; i >= 0; i--) {
@@ -36,7 +31,7 @@ public class Solution {
 	}
 	
 	public static ArrayList<String> names(String file) throws IOException{
-		Graph<String> names = new Graph<>();
+		Graph names = new Graph();
 		String goal = "neil armstrong";
 		//get file reader and first line
 		BufferedReader scan = new BufferedReader(new FileReader(file));
@@ -52,18 +47,23 @@ public class Solution {
 			//get index to split string
 			int dash = line.indexOf("-");
 			//get the names before and after arrow
-			String first = line.substring(0, dash - 1);
-			String second = line.substring(dash + 3, line.length() - 1);
+			String first = line.substring(0, dash - 1).toLowerCase();
+			String second = line.substring(dash + 3, line.length()).toLowerCase();
+			Vertex aPoint = new Vertex(first);
+			Vertex bPoint = new Vertex(second);
 			//if left to right then first point to second, else reverse
 			if(line.charAt(dash + 1) == '>')
-				names.addEdge(first.toLowerCase(), second.toLowerCase());
+				names.addConnection(aPoint, bPoint);
 			else
-				names.addEdge(second.toLowerCase(), first.toLowerCase());
+				names.addConnection(bPoint, aPoint);
 		}
-		
-		ArrayList<String> result = new ArrayList<>(names.breadthFirstSearch(goal, start));
-		
-		return result;
+		ArrayList<Vertex> result = names.search(goal, start);
+		ArrayList<String> lineage = new ArrayList<>();
+		for(Vertex x : result) {
+			lineage.add(x.getName());
+		}
+
+		return lineage;
 	}
 
 }
