@@ -40,10 +40,9 @@ public class Solution {
 		//get number of name pairs
 		line = scan.readLine();
 		Integer size = Integer.parseInt(line);
+		line = scan.readLine();
 		//get rest of names and add them to graph
-		for(int i = 0; i < size; i++) {
-			//get next line
-			line = scan.readLine();
+		for(int i = 0; i < size && line != null; i++) {
 			//get index to split string
 			int dash = line.indexOf("-");
 			//get the names before and after arrow
@@ -56,8 +55,10 @@ public class Solution {
 				names.addConnection(aPoint, bPoint);
 			else
 				names.addConnection(bPoint, aPoint);
+			//get next line
+			line = scan.readLine();
 		}
-		ArrayList<Vertex> result = names.search(goal, start);
+		ArrayList<Vertex> result = names.search(start, goal);
 		ArrayList<String> lineage = new ArrayList<>();
 		for(Vertex x : result) {
 			lineage.add(x.getName());
